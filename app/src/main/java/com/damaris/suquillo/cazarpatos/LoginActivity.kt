@@ -1,5 +1,6 @@
 package com.damaris.suquillo.cazarpatos
 
+import FileInternalManager
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -68,6 +69,10 @@ class LoginActivity : AppCompatActivity() {
         manejadorArchivo.SaveInformation(listadoAGrabar)
         manejadorArchivo= EncriptedSharedPreferencesManager(this)
         manejadorArchivo.SaveInformation(listadoAGrabar)
+        manejadorArchivo= FileInternalManager(this)
+        manejadorArchivo.SaveInformation(listadoAGrabar)
+        manejadorArchivo= FileExternalManager(this)
+        manejadorArchivo.SaveInformation(listadoAGrabar)
     }
 
     private fun LeerDatosDePreferencias(){
@@ -83,6 +88,24 @@ class LoginActivity : AppCompatActivity() {
 
         //Encrypted
         manejadorArchivo = EncriptedSharedPreferencesManager(this)
+        listadoLeido = manejadorArchivo.ReadInformation()
+        if(listadoLeido.first != null){
+            checkBoxRecordarme.isChecked = true
+        }
+        editTextEmail.setText ( listadoLeido.first )
+        editTextPassword.setText ( listadoLeido.second )
+
+        //Ficheros Internos
+        manejadorArchivo= FileInternalManager(this)
+        listadoLeido = manejadorArchivo.ReadInformation()
+        if(listadoLeido.first != null){
+            checkBoxRecordarme.isChecked = true
+        }
+        editTextEmail.setText ( listadoLeido.first )
+        editTextPassword.setText ( listadoLeido.second )
+
+        //Ficheros externos
+        manejadorArchivo= FileExternalManager(this)
         listadoLeido = manejadorArchivo.ReadInformation()
         if(listadoLeido.first != null){
             checkBoxRecordarme.isChecked = true

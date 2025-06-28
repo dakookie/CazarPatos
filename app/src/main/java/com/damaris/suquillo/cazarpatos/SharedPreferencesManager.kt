@@ -1,9 +1,8 @@
 package com.damaris.suquillo.cazarpatos
 
-import android.app.Activity
 import android.content.Context
 
-class SharedPreferencesManager (val actividad: Activity): FileHandler{
+class SharedPreferencesManager (val actividad: LoginActivity): FileHandler{
     override fun SaveInformation(datosAGrabar:Pair<String,String>){
         val sharedPref = actividad.getPreferences(Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
